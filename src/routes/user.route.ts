@@ -1,0 +1,28 @@
+import express, { Express, Request, Response } from "express";
+import { authenticateUser } from "../middlewares/authenticate";
+import { createAccountHandler } from "../handlers/user/createAccount.handler";
+import { loginUserHandler } from "../handlers/user/loginUser.handler";
+import { logOutUserHandler } from "../handlers/user/logoutUser.handler";
+import { sendVerificationEmail } from "../middlewares/sendVerificationEmail.middleware";
+import { verifyUserEmailHandler } from "../handlers/user/verifyUserEmail.handler";
+
+const User = require("../models/user.model");
+const userRoute = express.Router();
+
+//create user
+userRoute.post(
+    "/user/create-account",
+    sendVerificationEmail,
+    createAccountHandler
+);
+
+//login user
+userRoute.post("/user/login", authenticateUser, loginUserHandler);
+
+//logout user
+userRoute.get("/user/logout", logOutUserHandler);
+
+//verify user email
+userRoute.get("/user/verify-email", verifyUserEmailHandler);
+
+module.exports = userRoute;
