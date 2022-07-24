@@ -12,7 +12,6 @@ const userRoute = express.Router();
 //create user
 userRoute.post(
     "/user/create-account",
-    sendVerificationEmail,
     createAccountHandler
 );
 

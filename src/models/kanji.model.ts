@@ -2,7 +2,10 @@ import express from "express";
 import mongoose, { Schema } from "mongoose";
 
 const kanjiSchema: Schema = new mongoose.Schema({
-    word: String,
+    word: {
+        type:String,
+        unique:true
+    },
     meaning: String,
     on_reading: {
         reading: String,

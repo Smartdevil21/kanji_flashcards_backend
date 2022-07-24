@@ -1,4 +1,5 @@
 import express, { Express, Request, Response } from "express";
+import { sendVerificationEmail } from "../../middlewares/sendVerificationEmail.middleware";
 
 const User = require("../../models/user.model");
 
@@ -11,6 +12,8 @@ export async function createAccountHandler(req: Request, res: Response) {
                 httpOnly: true,
             })
             .json({ success: true, data: result });
+        const emailSent = await sendVerificationEmail({email:result.email, userID:result.id});
+        console.log(emailSent);   
     } catch (error) {
         console.log(`Err in POST /user/create-account: ${error}`);
         res.status(400).json({ success: false, message: `${error}` });
