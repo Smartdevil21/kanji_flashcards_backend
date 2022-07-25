@@ -3,9 +3,9 @@ import { arrToObjectGeneral } from "../../utils/helpers/arrayToObject";
 
 const Lists = require("../../models/lists.model");
 
-export async function addKanjiToListHandler(
+export async function updateList(
     req: Request<
-        { action: "add" | "delete" | "changeName" },
+        { action: "add" | "deleteItem" | "changeName" | "deleteList" },
         {},
         { word: string; newName: string },
         { userID: string; listID: string }
@@ -32,8 +32,8 @@ export async function addKanjiToListHandler(
                 );
                 res.status(200).json({ success: true, data: result1 });
                 break;
-            case "delete":
-                //to delete ite from list
+            case "deleteItem":
+                //to delete item from list
                 const result2 = await Lists.findOneAndUpdate(
                     { _id: req.query.listID },
                     {
@@ -54,9 +54,13 @@ export async function addKanjiToListHandler(
                 );
                 res.status(200).json({ success: true, data: result3 });
                 break;
+            case "deleteList":
+                const result4 = await Lists.findByIdAndDelete(req.query.listID);
+                res.status(200).json({ success: true, data: result4 });
+                break;
             default:
-                res.status(400).json({
-                    success: true,
+                res.status(200).json({
+                    success: false,
                     message: "Value of /:action is not valid!",
                 });
         }

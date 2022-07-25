@@ -26,12 +26,12 @@ const userSchema: Schema = new mongoose.Schema({
         unique: true,
         trim: true,
     },
-    lists: [
-        {
-            listName: String,
-            listItems: [String],
-        },
-    ],
+    // lists: [
+    //     {
+    //         listName: String,
+    //         listItems: [String],
+    //     },
+    // ],
     password: {
         type: String,
         required: true,

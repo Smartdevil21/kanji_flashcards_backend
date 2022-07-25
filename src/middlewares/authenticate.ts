@@ -15,6 +15,7 @@ export async function authenticateUser(
             user.password
         );
         req.body.passwordTest = passwordTest;
+        req.body.user = user;
         req.body.token = await user.generateToken();
         next();
     } catch (error) {

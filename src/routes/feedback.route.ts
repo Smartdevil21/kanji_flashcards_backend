@@ -9,7 +9,7 @@ feedbackRoute.post("/sendFeedback", async (req: Request, res: Response) => {
         const result = await Feedback(req.body).save();
         res.status(200).json({
             success: true,
-            data: { message: "Feedback sent", data: result },
+            data: result,
         });
     } catch (error) {
         console.log(`Err at POST /sendFeedback`);

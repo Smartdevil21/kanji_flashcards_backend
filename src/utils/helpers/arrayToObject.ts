@@ -1,4 +1,4 @@
-import { KanjiWordData } from "../../typings/interfaces/kanji.interface";
+import { KanjiWordData } from "../typings/interfaces/kanji.interface";
 
 export const arrayToObjectForKanjiWordData = (arr: KanjiWordData[]) => {
     const obj: any = {};
