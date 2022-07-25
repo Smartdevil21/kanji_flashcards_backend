@@ -24,7 +24,7 @@ export async function sendVerificationEmail({ email, userID }: Props) {
             to: `${email}`, // list of receivers
             subject: "Verification email!",
             text: "Verify your email!",
-            html: `<b>Hey there! </b><br> Click the link below to verify your email!<br/><a href='http://localhost:8001/user/verify-email?uid=${userID}'><button>Verify</button></a>`,
+            html: `<b>Hey there! </b><br> Click the link below to verify your email!<br/><a href='${process.env.DEPLOYED_URL}/user/verify-email?uid=${userID}'><button>Verify</button></a>`,
         };
         await transporter.sendMail(mailData, (err: any, info: any) => {
             if (err) throw new Error("Error in sending verification email!");
