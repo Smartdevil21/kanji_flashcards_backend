@@ -3,6 +3,7 @@ require("./configs/db.connection");
 import express, { Express, Request, Response } from "express";
 import helmet from "helmet";
 import bodyParser, { BodyParser } from "body-parser";
+const cors = require('cors');
 
 //require all routes
 const kanjiRoute = require("./routes/kanji.route");
@@ -18,6 +19,7 @@ const PORT = process.env.PORT || 8001;
 app.use(helmet());
 app.use(express.json());
 app.use(bodyParser.json());
+app.use(cors());
 
 //Including routes
 app.use(kanjiRoute);
