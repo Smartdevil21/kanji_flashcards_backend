@@ -9,7 +9,7 @@ const listSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    listItems: [{ type: String }],
+    listItems: [ String ],
 });
 
 const Lists = mongoose.model("list", listSchema);

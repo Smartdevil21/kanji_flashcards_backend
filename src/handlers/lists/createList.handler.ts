@@ -7,7 +7,6 @@ export async function createListHandler(
     res: Response
 ) {
     try {
-        console.log(req.query.ln, req.query.uid);
         const result = await Lists({
             userID: req.query.uid,
             listName: req.query.ln,
