@@ -8,13 +8,14 @@ export async function updateList(
         { action: "add" | "deleteItem" | "changeName" | "deleteList" },
         {},
         { word: string; newName: string },
-        { userID: string; listID: string }
+        { uid: string; ln: string }
     >,
     res: Response
 ) {
     try {
         const list = await Lists.findOne({
-            _id: req.query.listID,
+            listName: req.query.ln,
+            userID: req.query.uid,
         });
         if (!list) throw new Error("List not Found!");
         switch (req.params.action) {
@@ -26,7 +27,10 @@ export async function updateList(
                         `Item '${req.body.word}' already exist in the list`
                     );
                 const result1 = await Lists.findOneAndUpdate(
-                    { _id: req.query.listID },
+                    {
+                        listName: req.query.ln,
+                        userID: req.query.uid,
+                    },
                     { listItems: [...list.listItems, req.body.word] },
                     { new: true }
                 );
@@ -35,7 +39,7 @@ export async function updateList(
             case "deleteItem":
                 //to delete item from list
                 const result2 = await Lists.findOneAndUpdate(
-                    { _id: req.query.listID },
+                    { listName: req.query.ln, userID: req.query.uid },
                     {
                         listItems: list.listItems.filter(
                             (item: string) => item !== req.body.word
@@ -48,14 +52,17 @@ export async function updateList(
             case "changeName":
                 //to rename a list
                 const result3 = await Lists.findOneAndUpdate(
-                    { _id: req.query.listID },
+                    { listName: req.query.ln, userID: req.query.uid },
                     { listName: req.body.newName },
                     { new: true }
                 );
                 res.status(200).json({ success: true, data: result3 });
                 break;
             case "deleteList":
-                const result4 = await Lists.findByIdAndDelete(req.query.listID);
+                const result4 = await Lists.findOneAndDelete({
+                    listName: req.query.ln,
+                    userID: req.query.uid,
+                });
                 res.status(200).json({ success: true, data: result4 });
                 break;
             default:

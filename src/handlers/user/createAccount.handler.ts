@@ -1,12 +1,14 @@
 import express, { Express, Request, Response } from "express";
 import { sendVerificationEmail } from "../../middlewares/sendVerificationEmail.middleware";
 
+const List = require('../../models/lists.model');
 const User = require("../../models/user.model");
 
 export async function createAccountHandler(req: Request, res: Response) {
     try {
         const result = await User(req.body).save();
         const token = await result.generateToken();
+        const listResult = await List({userID: result._id, listName:"Bookmarks"}).save();
         res.status(201)
             .cookie("kanji_jwt", token, {
                 httpOnly: true,
