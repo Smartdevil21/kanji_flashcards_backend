@@ -18,3 +18,24 @@ export async function getkanjisByLevelHandler(
         res.status(400).json({ success: false, message: `${e}` });
     }
 }
+
+export async function getKanjis(
+    req: Request<{}, {}, { level: string[]; items: string[] }, {}>,
+    res: Response
+) {
+    try {
+        const response = await Kanjis.find({
+            $or: [
+                {
+                    level: { $in: req.body.level },
+                },
+                { word: { $in: req.body.items } },
+            ],
+        });
+        console.log(req.body.items, req.body.level);
+
+        res.status(200).json({ success: true, data: response });
+    } catch (error) {
+        console.log(`Err in POST /kanji/filter ${error}`);
+    }
+}

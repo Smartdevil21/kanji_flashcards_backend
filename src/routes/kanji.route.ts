@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from "express";
 import { addKanjiHandler } from "../handlers/kanjis/addKanji.handler";
-import { getkanjisByLevelHandler } from "../handlers/kanjis/getKanjisBylevel.handler";
+import { getKanjis, getkanjisByLevelHandler } from "../handlers/kanjis/getKanjisByFilter";
 import { searchKanjiHandler } from "../handlers/kanjis/searchKanji.handler";
 
 const kanjiRoute = express.Router();
@@ -13,5 +13,8 @@ kanjiRoute.post("/kanjis/add", addKanjiHandler);
 
 //get a word by meaning, romaji, kanji or anything
 kanjiRoute.post("/kanjis/search", searchKanjiHandler);
+
+//get all kanjis on the basis of levels provided and kanjiArr provided
+kanjiRoute.post('/kanjis/filter', getKanjis)
 
 module.exports = kanjiRoute;
