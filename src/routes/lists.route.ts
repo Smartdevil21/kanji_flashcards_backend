@@ -9,7 +9,7 @@ const User = require("../models/user.model");
 const listRoute = express.Router();
 
 //get all the lists details created by user
-listRoute.get("/list/userLists", getUserLists);
+listRoute.post("/list/userLists", getUserLists);
 
 //get all the details of items in list array
 listRoute.post("/list/items", getAllKanjisOfList);

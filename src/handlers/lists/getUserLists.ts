@@ -2,11 +2,15 @@ import express, { Request, Response } from "express";
 const List = require("../../models/lists.model");
 
 export default async function getUserLists(
-    req: Request<{}, {}, {}, { uid: string }>,
+    req: Request<{}, {}, {lns?:string[], uid: string}, {  }>,
     res: Response
 ) {
     try {
-        const result = await List.find({ userID: req.query.uid });
+        if(req.body.lns?.length){
+            const result = await List.find({ userID: req.body.uid, listName:{$in:req.body.lns} })
+            return res.status(200).json({ success: true, data: result });
+        }
+        const result = await List.find({ userID: req.body.uid });
         res.status(200).json({ success: true, data: result });
     } catch (error) {
         console.log(`Err in GET /lists/userLists ${error}`);
