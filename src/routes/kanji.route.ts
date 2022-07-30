@@ -18,7 +18,7 @@ kanjiRoute.post("/kanjis/search", searchKanjiHandler);
 //get all kanjis on the basis of levels provided and kanjiArr provided
 kanjiRoute.post('/kanjis/filter', getKanjis)
 
-//get all teh kanji entries
+//get all the kanji entries' property
 kanjiRoute.get('/kanjis/all', getAllKanjisHandler);
 
 module.exports = kanjiRoute;
