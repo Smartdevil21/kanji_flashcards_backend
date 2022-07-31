@@ -15,11 +15,17 @@ const feedbackRoute = require("./routes/feedback.route");
 const app: Express = express();
 const PORT = process.env.PORT || 8001;
 
+//configuring cors
+var corsOptions = {
+    origin: 'https://kanji-flashcards-frontend.vercel.app/',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  }
+
 //Basic Middlewares
 app.use(helmet());
 app.use(express.json());
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors(corsOptions));
 
 //Including routes
 app.use(kanjiRoute);

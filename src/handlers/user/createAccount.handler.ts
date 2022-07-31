@@ -17,6 +17,7 @@ export async function createAccountHandler(req: Request, res: Response) {
         const emailSent = await sendVerificationEmail({
             email: result.email,
             userID: result.id,
+            username: result.username
         });
         console.log(emailSent);
     } catch (error) {
