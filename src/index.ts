@@ -33,6 +33,10 @@ app.get("/", (req: Request, res: Response) => {
     res.status(200).json({ success: true, message: "Hello from the backend! Hit /kanjis?level=req_level, where level= 5 or 4." });
 });
 
+app.get('/test', (req:Request, res:Response)=>{
+    res.status(200).json({success:true, message: "CI work properly!"})
+})
+
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}...`);
 });
