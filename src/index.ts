@@ -30,7 +30,7 @@ app.use(listRoute);
 app.use(feedbackRoute);
 
 app.get("/", (req: Request, res: Response) => {
-    res.status(200).json({ success: true, message: "Hello from the backend! Hit /kanjis?level=req_level, where level= 5 or 4." });
+    res.status(200).json({ success: true, message: "Hello from the backend! Hit /kanjis?level=req_level, where level= 5 or 4.", flag:"Testing for CI" });
 });
 
 app.get('/test', (req:Request, res:Response)=>{
