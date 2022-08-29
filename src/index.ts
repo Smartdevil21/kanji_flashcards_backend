@@ -33,6 +33,10 @@ app.get("/", (req: Request, res: Response) => {
     res.status(200).json({ success: true, message: "Hello from the backend! Hit /kanjis?level=req_level, where level= 5 or 4.", flag:"Testing for CI" });
 });
 
+app.get('/ik_dev', (req:Request, res:Response)=>{
+    res.status(200).json({success:true, message: "hi i m iki!"})
+})
+
 app.get('/test', (req:Request, res:Response)=>{
     res.status(200).json({success:true, message: "CI work properly!"})
 })
