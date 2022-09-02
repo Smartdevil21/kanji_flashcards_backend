@@ -39,7 +39,7 @@ export default async function sendRecoveryEmail({
             </head>
             <body>
             <h2>Click the button below to reset your password!</h2>
-                <a href='${process.env.FRONTEND_URL}/recovery-email?uid=${uid}&p=b'><button style="
+                <a href='${process.env.FRONTEND_URL}/recovery-email/recovery?uid=${uid}'><button style="
                 background-color: #ff7d39;
                 color: #fff;
                 border: none;
