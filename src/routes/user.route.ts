@@ -6,6 +6,8 @@ import { logOutUserHandler } from "../handlers/user/logoutUser.handler";
 import { sendVerificationEmail } from "../middlewares/sendVerificationEmail.middleware";
 import { verifyUserEmailHandler } from "../handlers/user/verifyUserEmail.handler";
 import { loginUsingToken } from "../handlers/user/loginusingToken";
+import recoveryEmailHandler from "../handlers/user/recoveryEmail.handler";
+import updateInfo from "../handlers/user/updateInfo.handler";
 
 const User = require("../models/user.model");
 const userRoute = express.Router();
@@ -27,5 +29,11 @@ userRoute.get("/user/logout", logOutUserHandler);
 
 //verify user email
 userRoute.get("/user/verify-email", verifyUserEmailHandler);
+ 
+//send recovery email
+userRoute.post("/user/recover-account", recoveryEmailHandler);
+
+//update user information
+userRoute.post("/user/update-info", updateInfo);
 
 module.exports = userRoute;
