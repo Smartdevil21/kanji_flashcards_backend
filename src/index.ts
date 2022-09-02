@@ -5,7 +5,8 @@ import helmet from "helmet";
 import bodyParser, { BodyParser } from "body-parser";
 
 //require all configs
-const cors = require("./configs/cors.config");
+// const cors = require("./configs/cors.config");
+const cors = require('cors');
 
 //require all routes
 const kanjiRoute = require("./routes/kanji.route");
@@ -21,7 +22,7 @@ const PORT = process.env.PORT || 8001;
 app.use(helmet());
 app.use(express.json());
 app.use(bodyParser.json());
-app.use(cors);
+app.use(cors());
 
 //Including routes
 app.use(kanjiRoute);
